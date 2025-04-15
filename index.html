@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>절강대 양변기 지도</title>
+  <style>
+    body { margin: 0; }
+    #map-container {
+      position: relative;
+      width: 100%;
+      max-width: 800px;
+      margin: auto;
+    }
+    img {
+      width: 100%;
+      display: block;
+    }
+    .marker {
+      position: absolute;
+      background-color: rgb(119, 255, 0);
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+    #popup {
+      position: absolute;
+      background: white;
+      padding: 10px;
+      border: 1px solid black;
+      display: none;
+      z-index: 1000;
+    }
+  </style>
+</head>
+<body>
+  <div id="map-container">
+    <img src="map.png" alt="학교 지도">
+    
+    <div class="marker" style="top: 54%; left: 27%;" onclick="showInfo('관리 학원')"></div>
+    <div class="marker" style="top: 63%; left: 37%;" onclick="showInfo('전파 학원')"></div>
+    <div class="marker" style="top: 63%; left: 52%;" onclick="showInfo('서교실')"></div>
+
+    <div id="popup"></div>
+  </div>
+
+  <script>
+    const toiletData = {
+      "관리 학원": ["A동 4층: 비데", "C동 1층 카페: 양변기"],
+      "전파 학원": ["6층: 양변기"],
+      "서교실": ["2B 4층: 양변기"]
+    };
+
+    function showInfo(building) {
+      const popup = document.getElementById('popup');
+      popup.style.display = 'block';
+      popup.innerHTML = `<b>${building}</b><br>${toiletData[building].join('<br>')}`;
+      popup.style.top = event.clientY + 'px';
+      popup.style.left = event.clientX + 'px';
+    }
+  </script>
+</body>
+</html>
